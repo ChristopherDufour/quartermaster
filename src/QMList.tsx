@@ -3,7 +3,7 @@ import List, { ListItem } from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import Input from 'material-ui/Input';
 
-class QuartermasterList extends React.Component {
+class QMList extends React.Component {
     state = {
         checked: new Array<number|string>(),
     };
@@ -45,4 +45,4 @@ class QuartermasterList extends React.Component {
     }
 }
 
-export default QuartermasterList;
+export default QMList;

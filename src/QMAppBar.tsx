@@ -3,7 +3,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 
-class QuartermasterAppBar extends React.Component {
+class QMAppBar extends React.Component {
     render() {
         return (
             <AppBar position="static" color="default">
@@ -17,4 +17,4 @@ class QuartermasterAppBar extends React.Component {
     }
 }
 
-export default QuartermasterAppBar;
+export default QMAppBar;
