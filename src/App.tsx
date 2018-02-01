@@ -7,7 +7,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <QMAppBar />
-        <QMList />
+        <QMList id="App_Test_List"/>
       </div>
     );
   }

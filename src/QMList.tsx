@@ -1,14 +1,20 @@
+/// <reference path="./interfaces.d.ts" />
+
 import * as React from 'react';
-import List, { ListItem } from 'material-ui/List';
-import Checkbox from 'material-ui/Checkbox';
-import Input from 'material-ui/Input';
+import List from 'material-ui/List';
+import QMListItem from './QMListItem';
 
-class QMList extends React.Component {
-    state = {
-        checked: new Array<number|string>(),
-    };
+class QMList extends React.Component<QMListProps, QMListState> {
 
-    handleToggle = (value: number|string) => {
+    constructor(props: QMListItemProps) {
+        super(props);
+
+        this.state = {
+            checked: new Array<number | string>(),
+        };
+    }
+
+    handleToggle = (value: number | string) => {
         const { checked } = this.state;
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
@@ -23,22 +29,11 @@ class QMList extends React.Component {
             checked: newChecked,
         });
     }
-
     render() {
         return (
             <List>
-                {[0, 1, 2, 4].map(value => (
-                    <ListItem key={value} dense={true} button={true}>
-                        <Checkbox
-                            onChange={this.handleToggle.bind(this, value)}
-                            checked={this.state.checked.indexOf(value) !== -1}
-                        />
-                        <Input
-                            defaultValue={value}
-                            margin="dense"
-                            disableUnderline={true}
-                        />
-                    </ListItem>
+                {[0, 1, 2, 3, 4].map(value => (
+                    <QMListItem textValue={'Test ' + value} id={this.props.id + '~' + value} />
                 ))}
             </List>
         );
