@@ -6,7 +6,6 @@ import './index.css';
 import * as firebase from 'firebase';
 
 // Initialize Firebase
-// TODO: Replace with your project's customized code snippet
 var config = {
   apiKey: 'AIzaSyCXh2jkMgkDDwKWBz6MwfLYaSkRAbOGs6o',
   authDomain: 'quartermaster-791f3.firebaseapp.com',

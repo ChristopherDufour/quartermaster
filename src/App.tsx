@@ -7,8 +7,8 @@ import { CircularProgress } from 'material-ui/Progress';
 
 class App extends React.Component<{}, QMAppState> {
 
-  constructor() {
-    super({});
+  constructor(props: object) {
+    super(props);
     this.state = {
       loading: true,
       error: false,
@@ -17,7 +17,13 @@ class App extends React.Component<{}, QMAppState> {
 
   componentDidMount() {
     var self = this;
-    if (firebase.auth().currentUser === null) {
+    // Handle no app initialization
+    if (firebase.apps.length === 0) {
+      this.setState({
+        loading: true,
+        error: true
+      });
+    } else if (firebase.auth().currentUser === null) {
       this.setState({
         loading: true,
       });
