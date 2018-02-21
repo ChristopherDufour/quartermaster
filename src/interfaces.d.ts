@@ -1,21 +1,21 @@
 interface QMAppState {
-	error: boolean;
-	loading: boolean;
+  error: boolean;
+  loading: boolean;
 }
 
 interface QMListProps {
-	id: string;
+  id: string;
 }
 interface QMListState {
-	checked: Array<number | string>;
+  checked: Array<number | string>;
 }
 
 interface QMListItemProps {
-	id: string;
-	checked?: boolean;
-	textValue: string;
+  id: string;
+  checked?: boolean;
+  textValue: string;
 }
 interface QMListItemState {
-	checked: boolean;
-	textValue: string;
+  checked: boolean;
+  textValue: string;
 }
