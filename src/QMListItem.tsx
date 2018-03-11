@@ -10,8 +10,9 @@ class QMListItem extends React.Component<QMListItemProps, QMListItemState> {
   constructor(props: QMListItemProps) {
     super(props);
     this.state = {
-      checked: typeof this.props.checked === 'boolean' ? this.props.checked : false,
-      textValue: this.props.textValue,
+      id: props.id as string,
+      checked: props.checked as boolean,
+      value: props.value as string,
     };
   }
 
@@ -22,19 +23,19 @@ class QMListItem extends React.Component<QMListItemProps, QMListItemState> {
   }
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      textValue: event.target.value
+      value: event.target.value
     });
   }
 
   render() {
     return (
-      <ListItem key={this.props.id} dense={true} button={true}>
+      <ListItem dense={true} button={true} key={this.props.id}>
         <Checkbox
           onChange={this.handleToggleCheckbox}
           checked={this.state.checked}
         />
         <Input
-          value={this.state.textValue}
+          value={this.state.value}
           onChange={this.handleInputChange}
           margin="dense"
           disableUnderline={true}

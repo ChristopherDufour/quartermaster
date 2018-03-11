@@ -2,38 +2,64 @@
 
 import * as React from 'react';
 import List from 'material-ui/List';
+import ListSubheader from 'material-ui/List';
 import QMListItem from './QMListItem';
+import * as FirebaseConf from './FirebaseConf';
+import 'firebase';
 
 class QMList extends React.Component<QMListProps, QMListState> {
 
-  constructor(props: QMListItemProps) {
+  constructor(props: QMListProps) {
     super(props);
 
     this.state = {
-      checked: new Array<number | string>(),
+      id: props.id,
+      title: props.title,
+      items: new Array<QMListItemProps>(),
     };
   }
 
-  handleToggle = (value: number | string) => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  componentDidMount() {
+    var self = this;
+    var db = FirebaseConf.db;
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+    db.collection('items').where('listId', '==', self.state.id).get()
+      .then((listItemsSnapshot) => {
+        var listItems = new Array<QMListItemProps>();
 
-    this.setState({
-      checked: newChecked,
-    });
+        listItemsSnapshot.forEach((doc) => {
+
+          var docData = doc.data();
+          listItems.push({
+            id: doc.id,
+            checked: docData.checked,
+            value: docData.value
+          });
+        });
+
+        self.setState({
+          items: listItems
+        });
+
+      })
+      .catch((err) => {
+        self.setState({
+          items: new Array<QMListItemProps>()
+        });
+      });
   }
+
   render() {
     return (
       <List>
-        {[0, 1, 2, 3, 4].map(value => (
-          <QMListItem textValue={'Test ' + value} id={this.props.id + '~' + value} />
+        <ListSubheader>{this.state.title}</ListSubheader>
+        {this.state.items.map(value => (
+          <QMListItem
+            id={value.id}
+            value={value.value}
+            checked={value.checked}
+            key={this.props.id + 'Input'}
+          />
         ))}
       </List>
     );
